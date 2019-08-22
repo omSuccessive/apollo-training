@@ -1,49 +1,21 @@
-import { ApolloServer, gql } from 'apollo-server-express';
-import * as express from 'express';
+import express from 'express';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
+// import configuration from './config';
+import {configuration} from './config'
+import schema from '.';
 
-export default class Server {
-    constructor() {
-        const books = [
-            {
-                title: 'Harry Potter and the Chamber of Secrets',
-                author: 'J.K. Rowling',
-                name: 'jack Ryan'
-            },
-            {
-                title: 'Jurassic Park',
-                author: 'Michael Crichton',
-                name: 'tony Stark',
-            },
-        ];
+console.log('-----------', configuration.port);
+const app = express();
 
-        const typeDefs = gql`
- 
-  type Book {
-    title: String
-    author: String
-    name:  String
-  }
+const server = new ApolloServer({
+  schema: makeExecutableSchema(schema),
+});
 
- 
-  type Query {
-    books: [Book]
-  }
-`;
+server.applyMiddleware({ app });
 
-
-        const resolvers = {
-            Query: {
-                books: () => books,
-            },
-        };
-
-        const server = new ApolloServer({ typeDefs, resolvers });
-
-        const app = express();
-        server.applyMiddleware({ app });
-
-        app.listen({ port: 4000 }, () =>
+// app.listen({ port: configuration.port }, () => {
+//   console.log('server is ready');
+// });
+app.listen({ port: 4000 }, () =>
             console.log(`Server ready at http://localhost:4000${server.graphqlPath}`)
         );
-    }
-}

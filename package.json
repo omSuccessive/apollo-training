@@ -1,31 +1,32 @@
 {
   "name": "apollo-training",
   "version": "1.0.0",
-  "description": "GraphQL is a syntax that describes how to ask for data, and is generally used to load data from a server to a client. GraphQL has three main characteristics:            -It lets the client specify exactly what data it needs.            -It makes it easier to aggregate data from multiple sources.            -It uses a type system to describe data.",
-  "main": "index.js",
+  "description": "Repository for apollo training.",
+  "main": "build/server.js",
   "scripts": {
-    "start": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
-    "nodemon": "nodemon ./dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node build/server.js",
+    "prestart": "npm run build",
+    "build": "babel src -d build --copy-files",
+    "prebuild": "rm -rf build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/omSuccessive/apollo-training.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/omSuccessive/apollo-training/issues"
-  },
-  "homepage": "https://github.com/omSuccessive/apollo-training#readme",
+  "keywords": [
+    "GraphQL",
+    "Apollo",
+    "Express"
+  ],
+  "license": "MIT",
   "dependencies": {
-    "apollo-server": "^2.8.1",
+    "apollo-datasource-rest": "^0.6.1",
     "apollo-server-express": "^2.8.1",
-    "dotenv": "^8.1.0",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "graphql": "^14.4.2",
-    "nodemon": "^1.19.1",
-    "tsc-watch": "^2.4.0",
-    "typescript": "^3.5.3"
+    "merge-graphql-schemas": "^1.7.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5"
   }
 }
