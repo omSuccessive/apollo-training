@@ -3,7 +3,7 @@ import TraineeQuery from './trainee';
 
 
 
-console.log(UserQuery,TraineeQuery,"<--->")
+// console.log(UserQuery,TraineeQuery,"<--->")
 const resolvers = {
     Query: {
         ...UserQuery,

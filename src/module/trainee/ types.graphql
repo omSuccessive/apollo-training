@@ -1,10 +1,10 @@
   
 type allTrainee {
+        count: Int
     status: String
     message: String
-    data: [traineeData]
+    data: [profile]
 }
 type traineeData {
-    count: Int
     record: [profile]
 }

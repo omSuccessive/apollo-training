@@ -1,18 +1,16 @@
-// import {dataSource} from 'apollo-dataSource';
-// import config from '../../ config /configuration';
-// class Trainee extends dataSource{
-// constructor(){
-//     this.baseUrl = config.serviceurl;
-// }
-// async getTrainee(){
-//     return this.get('/Trainee');
-// }
-// // async createTrainee(name,email,password){
-// // return this.post('/Trainee',{name,email,password});
-// // }
-// // async updateTrainee(name,email,password){
-// //     return this.put('/Trainee',{name,email,password})
-// // }
-
-// } 
-// export default Trainee;
+import { RESTDataSource } from 'apollo-datasource-rest';
+import { configuration } from '../../config';
+class TraineeApi extends RESTDataSource {
+    constructor() {
+        super();
+        this.baseURL = configuration.serviceURL;
+    }
+    willSendRequest(request) {
+        request.headers.set('Authorization', this.context.authorization);
+    }
+    async getTrainee() {
+        const result = await this.get('trainee');
+        return result;
+    }
+}
+export default TraineeApi;

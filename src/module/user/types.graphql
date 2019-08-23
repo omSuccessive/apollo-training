@@ -1,3 +1,11 @@
+type user {
+
+    status: String
+    message: String
+    data: profile
+
+}
+
 type profile {
     id: ID
     createdBy: String
