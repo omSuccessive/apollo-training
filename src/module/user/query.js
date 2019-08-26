@@ -1,5 +1,5 @@
 const Query = {
-    userprofile: (parent, args, context) => {
+    userProfile: (parent, args, context) => {
         return null;
     },
 };

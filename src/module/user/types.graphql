@@ -1,17 +1,23 @@
 type user {
 
-    status: String
-    message: String
-    data: profile
+   status: String
+   message: String
+   data: profile
 
 }
 
 type profile {
-    id: ID
+
+     id: ID
     createdBy: String
     UpdatedBy: String
-    password: String
     email: String
+    password: String
     name: String
     role: String
+    originalId: String
+    createdAt: String
+    updatedAt: String
+
+
 }

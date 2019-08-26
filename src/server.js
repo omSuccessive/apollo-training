@@ -7,9 +7,9 @@ import TraineeApi from './services';
 
 // console.log(TraineeApi);
 const app = express();
-app.get('/health-check', (req, res) => {
-  res.send('I am fine');
-});
+// app.get('/health-check', (req, res) => {
+//   res.send('I am fine');
+// });
 
 const server = new ApolloServer({
   schema: makeExecutableSchema(schema),
@@ -19,7 +19,7 @@ const server = new ApolloServer({
     };
   },
 
-context: ({ req}) => {
+context: ({ req }) => {
     return { authorization : req.headers.authorization }
   }
 });
