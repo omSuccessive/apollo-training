@@ -1,6 +1,10 @@
 const Query = {
-    userProfile: (parent, args, context) => {
-        return null;
+    
+    userProfile: async (parent, args, { dataSources }) => {
+
+        const result = await dataSources.userApi.profile();
+        return result;
+
     },
 };
 export default Query;

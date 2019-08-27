@@ -18,6 +18,16 @@ type profile {
     originalId: String
     createdAt: String
     updatedAt: String
-
-
+}
+input requestLogin {
+    email: String
+    password: String
+}
+type loginResponse {
+    data: token
+    message: String
+    status: String
+}
+type token {
+    token: String
 }

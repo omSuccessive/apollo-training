@@ -1,34 +1,41 @@
+// import express from 'express';
+// import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
+// import { configuration } from './config'
+// import schema from '.';
+// // import TraineeApi from './services';
 import express from 'express';
 import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
-
-import { configuration } from './config'
+import { configuration } from './config';
+import { createServer } from 'http';
+import { TraineeApi, UserApi } from './services';
 import schema from '.';
-import TraineeApi from './services';
 
-// console.log(TraineeApi);
 const app = express();
-// app.get('/health-check', (req, res) => {
-//   res.send('I am fine');
-// });
 
 const server = new ApolloServer({
   schema: makeExecutableSchema(schema),
   dataSources: () => {
     return {
       traineeApi : new TraineeApi(),
+      userApi: new UserApi(),
     };
   },
 
-context: ({ req }) => {
-    return { authorization : req.headers.authorization }
+  context: ({ req, connection }) => {
+    if (connection) {
+      return connection.context;
+    }
+    return { authorization: req.headers.authorization || "" }
   }
 });
 server.applyMiddleware({ app });
-// app.listen({ port: configuration.port }, () => {
-//   console.log('server is readyat http://localhost:4000${server.graphqlPath}' );
-// });
+const httpServer = createServer(app);
+server.installSubscriptionHandlers(httpServer);
 
+httpServer.listen({ port: configuration.port }, () => {
+  console.log(`🚀 Server ready at http://localhost:${configuration.port}${server.graphqlPath}`)
+  console.log(`🚀 Subscriptions ready at ws://localhost:${configuration.port}${server.subscriptionsPath}`)
 
-app.listen({ port: 4000 }, () =>
-  console.log(`Server ready at http://localhost:4000${server.graphqlPath}`)
-);
+  console.log('server is ready');
+});
+export const LOGIN = 'LOGIN';
