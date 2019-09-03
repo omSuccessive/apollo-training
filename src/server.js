@@ -1,14 +1,10 @@
-// import express from 'express';
-// import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
-// import { configuration } from './config'
-// import schema from '.';
-// // import TraineeApi from './services';
 import express from 'express';
 import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
-import { configuration } from './config';
-import { createServer } from 'http';
-import { TraineeApi, UserApi } from './services';
+import { configuration } from './config'
 import schema from '.';
+import {TraineeApi,UserApi} from './services';
+import { createServer } from 'http';
+
 
 const app = express();
 
@@ -39,3 +35,5 @@ httpServer.listen({ port: configuration.port }, () => {
   console.log('server is ready');
 });
 export const LOGIN = 'LOGIN';
+
+
