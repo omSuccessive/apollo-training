@@ -1,8 +1,0 @@
-  
-type allTrainee {
-
-   count: Int
-   status: String
-   message: String
-   data: [profile]
-}

@@ -1,6 +1,0 @@
-type Query {
-
-   userProfile: user
-   getTrainee: [allTrainee]
-
-}
